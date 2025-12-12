@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>松代商店 店長会議議事録 2025.12.10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #FF6B9D;
+      --orange: #FF9F43;
+      --yellow: #FECA57;
+      --green: #1DD1A1;
+      --cyan: #54A0FF;
+      --purple: #A29BFE;
+      --red: #FF6B6B;
+      --blue: #667eea;
+      --dark: #2D3436;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    .header {
+      background: white;
+      border-radius: 30px;
+      padding: 40px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .header h1 {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .header-date { font-size: 1.2rem; color: #666; margin-bottom: 20px; }
+    .slogan {
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      color: white;
+      padding: 20px 40px;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: inline-block;
+      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    .meeting-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 30px;
+    }
+    .info-card {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 15px 20px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .info-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .info-card:nth-child(1) .info-icon { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+    .info-card:nth-child(2) .info-icon { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+    .info-card:nth-child(3) .info-icon { background: linear-gradient(135deg, var(--orange), var(--yellow)); }
+    .info-text { font-size: 0.9rem; color: var(--dark); }
+    .info-label { font-weight: 700; font-size: 0.75rem; color: #888; }
+    
+    .kpi-section {
+      background: white;
+      border-radius: 30px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .section-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .section-icon {
+      width: 50px; height: 50px; border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: white;
+    }
+    .priority-badge {
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-left: 10px;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .main-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .main-kpi-card {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border-radius: 25px;
+      padding: 30px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .main-kpi-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4); }
+    .main-kpi-card:nth-child(2) { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+    .main-kpi-icon { font-size: 2rem; margin-bottom: 10px; }
+    .main-kpi-value { font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 5px; }
+    .main-kpi-label { font-size: 0.9rem; opacity: 0.9; }
+    
+    .sub-kpi-section {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 20px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+    .sub-kpi-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #666;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sub-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    .sub-kpi-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #eee;
+    }
+    .sub-kpi-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--dark);
+    }
+    .sub-kpi-value.positive { color: var(--green); }
+    .sub-kpi-value.negative { color: var(--red); }
+    .sub-kpi-label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 5px;
+    }
+    
+    .store-table-wrapper { overflow-x: auto; margin-top: 30px; }
+    .store-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .store-table th {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: white; padding: 15px 10px; text-align: center; font-weight: 700;
+    }
+    .store-table th:first-child { border-radius: 15px 0 0 0; }
+    .store-table th:last-child { border-radius: 0 15px 0 0; }
+    .store-table td { padding: 12px 10px; text-align: center; border-bottom: 1px solid #eee; }
+    .store-table tbody tr:hover { background: linear-gradient(135deg, #f8f9fa, #fff); }
+    .store-table tbody tr:last-child td {
+      font-weight: 900;
+      background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+      font-size: 1.05rem;
+    }
+    .store-table tbody tr:last-child td:first-child { border-radius: 0 0 0 15px; }
+    .store-table tbody tr:last-child td:last-child { border-radius: 0 0 15px 0; }
+    .store-name-cell {
+      display: flex; align-items: center; gap: 10px;
+      justify-content: flex-start; padding-left: 15px !important;
+    }
+    .store-emoji { font-size: 1.3rem; }
+    .highlight-value { font-weight: 900; color: var(--blue); }
+    .highlight-green { color: var(--green); font-weight: 700; }
+    .highlight-orange { color: var(--orange); font-weight: 700; }
+    .rank-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      font-size: 0.8rem; font-weight: 900; color: white;
+    }
+    .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
+    .rank-2 { background: linear-gradient(135deg, #C0C0C0, #A0A0A0); }
+    .rank-3 { background: linear-gradient(135deg, #CD7F32, #8B4513); }
+    
+    .success-section { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+    .success-card, .improve-card {
+      background: white; border-radius: 30px; padding: 35px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .success-card .section-icon { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+    .improve-card .section-icon { background: linear-gradient(135deg, var(--orange), var(--red)); }
+    .case-list { display: flex; flex-direction: column; gap: 15px; }
+    .case-item {
+      background: linear-gradient(135deg, #f0fff4, #e6fffa);
+      border-radius: 15px; padding: 20px;
+      border-left: 5px solid var(--green);
+      transition: transform 0.2s;
+    }
+    .case-item:hover { transform: translateX(5px); }
+    .improve-card .case-item {
+      background: linear-gradient(135deg, #fff5f5, #fffaf0);
+      border-left-color: var(--orange);
+    }
+    .case-name { font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .case-date { font-size: 0.75rem; color: #888; margin-left: 10px; }
+    .case-stats { display: flex; gap: 15px; margin-bottom: 8px; }
+    .stat-badge {
+      background: var(--green); color: white;
+      padding: 4px 12px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 700;
+    }
+    .improve-card .stat-badge { background: var(--orange); }
+    .case-note { font-size: 0.85rem; color: #666; }
+    
+    .other-success-section {
+      background: white;
+      border-radius: 30px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .other-success-section .section-icon { background: linear-gradient(135deg, var(--yellow), var(--orange)); }
+    .other-success-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+    .other-success-card {
+      background: linear-gradient(135deg, #fffaf0, #fff5eb);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid var(--yellow);
+      transition: all 0.3s;
+    }
+    .other-success-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(254, 202, 87, 0.3);
+    }
+    .other-success-date { font-size: 0.8rem; color: #888; margin-bottom: 5px; }
+    .other-success-place {
+      font-weight: 700; font-size: 0.95rem; color: var(--dark);
+      margin-bottom: 5px; min-height: 40px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .other-success-store {
+      font-size: 0.8rem; color: var(--orange);
+      font-weight: 700; margin-bottom: 10px;
+    }
+    .other-success-stats {
+      background: linear-gradient(135deg, var(--orange), var(--yellow));
+      color: white; padding: 8px 12px; border-radius: 10px;
+      font-weight: 900; font-size: 0.9rem;
+    }
+    
+    /* 6つのポイント */
+    .points-section {
+      background: white; border-radius: 30px; padding: 40px;
+      margin-bottom: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .points-section .section-icon { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+    .points-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .point-card {
+      background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
+      border-radius: 20px; padding: 25px 15px; text-align: center;
+      border: 3px solid transparent; transition: all 0.3s;
+    }
+    .point-card:hover {
+      transform: translateY(-5px); border-color: var(--blue);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    }
+    .point-card.most-important {
+      border: 4px solid var(--red);
+      background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+      grid-column: span 3;
+    }
+    .point-card.most-important:hover {
+      border-color: var(--red);
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    }
+    .point-number {
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 900; color: white;
+      margin: 0 auto 15px;
+    }
+    .point-card.most-important .point-number {
+      width: 60px; height: 60px; font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--red), var(--orange)) !important;
+    }
+    .point-card:nth-child(2) .point-number { background: linear-gradient(135deg, var(--pink), var(--red)); }
+    .point-card:nth-child(3) .point-number { background: linear-gradient(135deg, var(--orange), var(--yellow)); }
+    .point-card:nth-child(4) .point-number { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+    .point-card:nth-child(5) .point-number { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+    .point-card:nth-child(6) .point-number { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+    .point-title { font-weight: 700; font-size: 1rem; color: var(--dark); margin-bottom: 10px; }
+    .point-card.most-important .point-title { font-size: 1.3rem; color: var(--red); }
+    .point-desc { font-size: 0.8rem; color: #666; line-height: 1.5; }
+    .point-card.most-important .point-desc { font-size: 0.95rem; color: #555; }
+    .most-important-badge {
+      background: var(--red);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    
+    .stores-section {
+      background: white; border-radius: 30px; padding: 40px;
+      margin-bottom: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .stores-section .section-icon { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+    .stores-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .store-card {
+      background: linear-gradient(135deg, #f8f9fa, #fff);
+      border-radius: 20px; padding: 25px;
+      border: 2px solid #eee; transition: all 0.3s;
+    }
+    .store-card:hover { border-color: var(--blue); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15); }
+    .store-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+    .store-icon {
+      width: 45px; height: 45px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: white;
+    }
+    .store-card:nth-child(1) .store-icon { background: linear-gradient(135deg, var(--pink), var(--red)); }
+    .store-card:nth-child(2) .store-icon { background: linear-gradient(135deg, var(--orange), var(--yellow)); }
+    .store-card:nth-child(3) .store-icon { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+    .store-card:nth-child(4) .store-icon { background: linear-gradient(135deg, var(--cyan), var(--blue)); }
+    .store-card:nth-child(5) .store-icon { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+    .store-card:nth-child(6) .store-icon { background: linear-gradient(135deg, var(--yellow), var(--green)); }
+    .store-card:nth-child(7) .store-icon { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+    .store-card:nth-child(8) .store-icon { background: linear-gradient(135deg, var(--red), var(--orange)); }
+    .store-card:nth-child(9) .store-icon { background: linear-gradient(135deg, var(--cyan), var(--green)); }
+    .store-name { font-weight: 900; font-size: 1.1rem; color: var(--dark); }
+    .store-stats {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: white; padding: 8px 15px; border-radius: 10px;
+      font-size: 0.85rem; font-weight: 700;
+      margin-bottom: 15px; display: inline-block;
+    }
+    .store-tasks { list-style: none; }
+    .store-tasks li {
+      padding: 8px 0; border-bottom: 1px dashed #ddd;
+      font-size: 0.85rem; color: #555;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .store-tasks li:last-child { border-bottom: none; }
+    .task-icon { color: var(--orange); font-weight: bold; }
+    
+    .training-section {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 30px; padding: 40px; margin-bottom: 30px;
+      color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .training-section .section-title { color: white; }
+    .training-section .section-icon { background: rgba(255,255,255,0.2); }
+    .training-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .training-card {
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+      border-radius: 20px; padding: 25px; text-align: center;
+      border: 2px solid rgba(255,255,255,0.2); transition: all 0.3s;
+    }
+    .training-card:hover { background: rgba(255,255,255,0.25); transform: translateY(-5px); }
+    .training-icon { font-size: 2.5rem; margin-bottom: 15px; }
+    .training-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; }
+    .training-desc { font-size: 0.85rem; opacity: 0.9; line-height: 1.5; }
+    
+    .hr-section { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+    .hr-card {
+      background: white; border-radius: 30px; padding: 35px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .hr-card:first-child .section-icon { background: linear-gradient(135deg, var(--red), var(--orange)); }
+    .hr-card:last-child .section-icon { background: linear-gradient(135deg, var(--green), var(--cyan)); }
+    .person-card {
+      display: flex; align-items: center; gap: 15px; padding: 15px;
+      background: linear-gradient(135deg, #fff5f5, #fffaf0);
+      border-radius: 15px; margin-bottom: 15px;
+    }
+    .person-avatar {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--pink));
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    }
+    .person-info { flex: 1; }
+    .person-name { font-weight: 700; color: var(--dark); }
+    .person-detail { font-size: 0.85rem; color: #666; }
+    .timee-flow {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px; background: linear-gradient(135deg, #e6fffa, #f0fff4);
+      border-radius: 15px;
+    }
+    .flow-step { text-align: center; flex: 1; }
+    .flow-icon {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin: 0 auto 10px; color: white;
+    }
+    .flow-title { font-weight: 700; font-size: 0.9rem; color: var(--dark); }
+    .flow-arrow { font-size: 2rem; color: var(--green); }
+    
+    .strategy-section {
+      background: white; border-radius: 30px; padding: 40px;
+      margin-bottom: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .strategy-section .section-icon { background: linear-gradient(135deg, var(--purple), var(--pink)); }
+    .strategy-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+    .strategy-card {
+      background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+      border-radius: 20px; padding: 20px; text-align: center;
+      border: 2px solid transparent; transition: all 0.3s;
+    }
+    .strategy-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .strategy-card:nth-child(1) { border-color: var(--pink); }
+    .strategy-card:nth-child(2) { border-color: var(--orange); }
+    .strategy-card:nth-child(3) { border-color: var(--green); }
+    .strategy-card:nth-child(4) { border-color: var(--cyan); }
+    .strategy-card:nth-child(5) { border-color: var(--purple); }
+    .strategy-icon { font-size: 2rem; margin-bottom: 10px; }
+    .strategy-title { font-weight: 700; font-size: 0.95rem; color: var(--dark); margin-bottom: 8px; }
+    .strategy-desc { font-size: 0.8rem; color: #666; line-height: 1.4; }
+    
+    .next-section {
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      border-radius: 30px; padding: 40px; margin-bottom: 30px;
+      color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .next-section .section-title { color: white; }
+    .next-section .section-icon { background: rgba(255,255,255,0.2); }
+    .next-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .next-card {
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+      border-radius: 20px; padding: 25px;
+      border: 2px solid rgba(255,255,255,0.2); transition: all 0.3s;
+    }
+    .next-card:hover { background: rgba(255,255,255,0.25); transform: translateY(-5px); }
+    .next-title { font-weight: 700; font-size: 1rem; margin-bottom: 10px; }
+    .next-meta { font-size: 0.85rem; opacity: 0.9; }
+    
+    .message-section {
+      background: white; border-radius: 30px; padding: 50px;
+      text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      position: relative; overflow: hidden;
+    }
+    .message-section::before {
+      content: '"'; position: absolute; top: 20px; left: 40px;
+      font-size: 8rem; color: rgba(102, 126, 234, 0.1);
+      font-family: serif; line-height: 1;
+    }
+    .main-message {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 2.2rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 20px; position: relative; z-index: 1;
+    }
+    .message-author { font-size: 1.1rem; color: #666; margin-bottom: 30px; }
+    .sub-messages {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 15px; max-width: 800px; margin: 0 auto;
+    }
+    .sub-message {
+      background: linear-gradient(135deg, #f8f9fa, #fff);
+      padding: 15px 20px; border-radius: 15px;
+      font-size: 0.95rem; color: #555;
+      border-left: 4px solid var(--blue); text-align: left;
+    }
+    .footer { text-align: center; padding: 30px; color: white; font-size: 0.9rem; }
+    
+    @media (max-width: 1200px) {
+      .main-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .points-grid { grid-template-columns: repeat(2, 1fr); }
+      .point-card.most-important { grid-column: span 2; }
+      .stores-grid { grid-template-columns: repeat(2, 1fr); }
+      .training-grid { grid-template-columns: repeat(2, 1fr); }
+      .strategy-grid { grid-template-columns: repeat(3, 1fr); }
+      .other-success-grid { grid-template-columns: repeat(3, 1fr); }
+      .sub-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 2rem; }
+      .slogan { font-size: 1rem; padding: 15px 25px; }
+      .success-section, .hr-section { grid-template-columns: 1fr; }
+      .main-kpi-grid, .points-grid, .stores-grid, .training-grid, .strategy-grid, .next-grid, .other-success-grid { grid-template-columns: 1fr; }
+      .point-card.most-important { grid-column: span 1; }
+      .sub-messages { grid-template-columns: 1fr; }
+      .timee-flow { flex-direction: column; gap: 20px; }
+      .flow-arrow { transform: rotate(90deg); }
+      .sub-kpi-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🏪 松代商店 店長会議</h1>
+      <p class="header-date">📅 2025年12月10日（水）14:50〜17:50｜Google Meet</p>
+      <div class="slogan">🔥 革命は支店からしか起こらない。革命は支店で起こせ。革命は支店から。</div>
+      <div class="meeting-info">
+        <div class="info-card">
+          <div class="info-icon">⏱️</div>
+          <div><div class="info-label">所要時間</div><div class="info-text">約3時間</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">👥</div>
+          <div><div class="info-label">参加店舗</div><div class="info-text">全9店舗 + 明治</div></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🎯</div>
+          <div><div class="info-label">メインテーマ</div><div class="info-text">法人イベント強化</div></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="kpi-section">
+      <h2 class="section-title">
+        <div class="section-icon" style="background: linear-gradient(135deg, var(--blue), var(--purple));">📊</div>
+        11月実績 ダッシュボード（イベント営業）
+        <span class="priority-badge">🔥 最重要課題</span>
+      </h2>
+      <div class="main-kpi-grid">
+        <div class="main-kpi-card">
+          <div class="main-kpi-icon">🤝</div>
+          <div class="main-kpi-value">197軒</div>
+          <div class="main-kpi-label">総契約軒数</div>
+        </div>
+        <div class="main-kpi-card">
+          <div class="main-kpi-icon">🥛</div>
+          <div class="main-kpi-value">1,074本</div>
+          <div class="main-kpi-label">総契約週本数</div>
+        </div>
+      </div>
+      
+      <div class="sub-kpi-section">
+        <div class="sub-kpi-title">📋 全営業活動（11月）- 参考数値</div>
+        <div class="sub-kpi-grid">
+          <div class="sub-kpi-card">
+            <div class="sub-kpi-value">845軒</div>
+            <div class="sub-kpi-label">全店開拓数</div>
+          </div>
+          <div class="sub-kpi-card">
+            <div class="sub-kpi-value">713軒</div>
+            <div class="sub-kpi-label">全店解約数</div>
+          </div>
+          <div class="sub-kpi-card">
+            <div class="sub-kpi-value positive">+23軒</div>
+            <div class="sub-kpi-label">純増</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="store-table-wrapper">
+        <h3 style="font-size: 1.2rem; color: var(--dark); margin-bottom: 15px; margin-top: 30px;">🏆 イベント営業ランキング（総契約軒数順）</h3>
+        <table class="store-table">
+          <thead>
+            <tr>
+              <th>順位</th><th>店舗名</th><th>総契約軒</th><th>総契約週本</th><th>増本軒</th><th>増本週本</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="rank-badge rank-1">🥇</span></td><td class="store-name-cell"><span class="store-emoji">🏠</span>本店</td><td class="highlight-value">85</td><td class="highlight-value">480</td><td>1</td><td>1</td></tr>
+            <tr><td><span class="rank-badge rank-2">🥈</span></td><td class="store-name-cell"><span class="store-emoji">🎯</span>平生店</td><td class="highlight-green">34</td><td class="highlight-green">157</td><td>0</td><td>0</td></tr>
+            <tr><td><span class="rank-badge rank-3">🥉</span></td><td class="store-name-cell"><span class="store-emoji">🌊</span>周南店</td><td class="highlight-orange">24</td><td class="highlight-orange">127</td><td>1</td><td>3</td></tr>
+            <tr><td>4</td><td class="store-name-cell"><span class="store-emoji">⛏️</span>宇部店</td><td>17</td><td>95</td><td>5</td><td>12</td></tr>
+            <tr><td>5</td><td class="store-name-cell"><span class="store-emoji">🏯</span>岩国店</td><td>14</td><td>79</td><td>0</td><td>0</td></tr>
+            <tr><td>6</td><td class="store-name-cell"><span class="store-emoji">✨</span>光店</td><td>13</td><td>72</td><td>0</td><td>0</td></tr>
+            <tr><td>7</td><td class="store-name-cell"><span class="store-emoji">📍</span>則貞店</td><td>5</td><td>28</td><td>1</td><td>3</td></tr>
+            <tr><td>8</td><td class="store-name-cell"><span class="store-emoji">🌉</span>下関店</td><td>4</td><td>31</td><td>0</td><td>0</td></tr>
+            <tr><td>9</td><td class="store-name-cell"><span class="store-emoji">🏘️</span>尾尻店</td><td>1</td><td>5</td><td>0</td><td>0</td></tr>
+            <tr><td>🏆</td><td class="store-name-cell"><span class="store-emoji">📊</span><strong>トータル</strong></td><td><strong>197</strong></td><td><strong>1,074</strong></td><td><strong>8</strong></td><td><strong>19</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="success-section">
+      <div class="success-card">
+        <h2 class="section-title"><div class="section-icon">🏆</div>法人イベント SUCCESS</h2>
+        <div class="case-list">
+          <div class="case-item">
+            <div class="case-name">🏢 JA柳井 お客様感謝祭<span class="case-date">11/08</span></div>
+            <div class="case-stats"><span class="stat-badge">9軒契約</span><span class="stat-badge">35本</span></div>
+            <div class="case-note">✨ 平生店｜地域密着型の大型感謝祭で好成績</div>
+          </div>
+          <div class="case-item">
+            <div class="case-name">🏛️ 大竹栄公民館<span class="case-date">11/10</span></div>
+            <div class="case-stats"><span class="stat-badge">5軒契約</span><span class="stat-badge">23本</span></div>
+            <div class="case-note">✨ 岩国店｜公民館イベントで安定した成果</div>
+          </div>
+          <div class="case-item">
+            <div class="case-name">🏫 徳地中学校 職員室<span class="case-date">11/19</span></div>
+            <div class="case-stats"><span class="stat-badge">4軒契約</span><span class="stat-badge">26本</span></div>
+            <div class="case-note">✨ 本店｜学校関係者への信頼構築</div>
+          </div>
+          <div class="case-item">
+            <div class="case-name">👵 いきいきサロン上迫集会所<span class="case-date">11/12</span></div>
+            <div class="case-stats"><span class="stat-badge">3軒契約</span><span class="stat-badge">21本</span></div>
+            <div class="case-note">✨ 周南店｜4人体制（インボディ持参）で短時間対応</div>
+          </div>
+          <div class="case-item">
+            <div class="case-name">🏢 宇部市役所交流棟リコ市場<span class="case-date">11/15</span></div>
+            <div class="case-stats"><span class="stat-badge">3軒契約</span><span class="stat-badge">23本</span></div>
+            <div class="case-note">✨ 宇部店｜市役所での定期開催</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="improve-card">
+        <h2 class="section-title"><div class="section-icon">⚠️</div>法人イベント 要改善</h2>
+        <div class="case-list">
+          <div class="case-item">
+            <div class="case-name">🏭 THK食堂<span class="case-date">11/19</span></div>
+            <div class="case-stats"><span class="stat-badge">2軒契約</span><span class="stat-badge">10本</span></div>
+            <div class="case-note" style="margin-bottom: 10px;">
+              <strong>😰 課題:</strong><br>
+              ・休憩時間が短くクロージング時間不足<br>
+              ・インボディ設置場所が悪く女性が敬遠
+            </div>
+            <div class="case-note">
+              <strong>💡 改善策:</strong><br>
+              ・事前予約制の導入<br>
+              ・パーテーション設置でプライバシー配慮<br>
+              ・サンプル配布+後追い営業への切り替え
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="other-success-section">
+      <h2 class="section-title">
+        <div class="section-icon">🎪</div>
+        その他イベント成功事例（道の駅・マルシェ等）
+      </h2>
+      <div class="other-success-grid">
+        <div class="other-success-card">
+          <div class="other-success-date">11/23</div>
+          <div class="other-success-place">里の厨</div>
+          <div class="other-success-store">光店</div>
+          <div class="other-success-stats">9軒 / 52本</div>
+        </div>
+        <div class="other-success-card">
+          <div class="other-success-date">11/23</div>
+          <div class="other-success-place">金魚ちょうちんバザール</div>
+          <div class="other-success-store">平生店</div>
+          <div class="other-success-stats">9軒 / 51本</div>
+        </div>
+        <div class="other-success-card">
+          <div class="other-success-date">11/02</div>
+          <div class="other-success-place">道の駅きららあじす</div>
+          <div class="other-success-store">本店</div>
+          <div class="other-success-stats">9軒 / 41本</div>
+        </div>
+        <div class="other-success-card">
+          <div class="other-success-date">11/29</div>
+          <div class="other-success-place">道の駅きらら阿知須</div>
+          <div class="other-success-store">本店</div>
+          <div class="other-success-stats">9軒 / 51本</div>
+        </div>
+        <div class="other-success-card">
+          <div class="other-success-date">11/30</div>
+          <div class="other-success-place">フラワーランドおさんぽマーケット</div>
+          <div class="other-success-store">平生店</div>
+          <div class="other-success-stats">7軒 / 32本</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="points-section">
+      <h2 class="section-title"><div class="section-icon">💡</div>法人イベント成功の6つのポイント（社長総括）</h2>
+      <div class="points-grid">
+        <div class="point-card most-important">
+          <span class="most-important-badge">🔥 超重要</span>
+          <div class="point-number">1</div>
+          <div class="point-title">🏢 イベント会場の新規開拓</div>
+          <div class="point-desc">店舗内で<strong>「誰がどこに商談に行くか」</strong>を誰かが仕切って話し合い、情報交換、決定していかないと絶対に進まない。これが最も重要なポイント。</div>
+        </div>
+        <div class="point-card"><div class="point-number">2</div><div class="point-title">⏰ 長時間イベント</div><div class="point-desc">1時間ではなく半日〜終日での実施を交渉</div></div>
+        <div class="point-card"><div class="point-number">3</div><div class="point-title">🔄 継続会場の確保</div><div class="point-desc">半年に1回、3ヶ月に1回など定期開催できる場所を増やす</div></div>
+        <div class="point-card"><div class="point-number">4</div><div class="point-title">🏠 屋内会場の確保</div><div class="point-desc">寒い時期に備え屋内で実施できる場所を持つ</div></div>
+        <div class="point-card"><div class="point-number">5</div><div class="point-title">👥 適切な人員配置</div><div class="point-desc">短時間イベントは3人以上体制（測定・説明・クロージング）</div></div>
+        <div class="point-card"><div class="point-number">6</div><div class="point-title">🎯 柔軟な戦略</div><div class="point-desc">即決困難時はサンプル配布+後追い営業の二段階アプローチ</div></div>
+      </div>
+    </section>
+
+    <section class="stores-section">
+      <h2 class="section-title"><div class="section-icon">🏪</div>店舗別レポート & アクション</h2>
+      <div class="stores-grid">
+        <div class="store-card"><div class="store-header"><div class="store-icon">🏠</div><div class="store-name">本店</div></div><div class="store-stats">🥇 イベント営業1位｜85軒/480本</div><ul class="store-tasks"><li><span class="task-icon">→</span>松永氏・河瀬氏がイベントで才能開花</li><li><span class="task-icon">→</span>生命保険会社とのコラボ進行</li><li><span class="task-icon">→</span>SNS活用（インスタ・FB）の検討</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">🎯</div><div class="store-name">平生店</div></div><div class="store-stats">🥈 イベント営業2位｜34軒/157本</div><ul class="store-tasks"><li><span class="task-icon">⭐</span>梅本氏が目標35件を36件達成！</li><li><span class="task-icon">→</span>解約率改善（本店の約半分）</li><li><span class="task-icon">→</span>新規顧客獲得の抜本的改革</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">🌊</div><div class="store-name">周南店</div></div><div class="store-stats">🥉 イベント営業3位｜24軒/127本</div><ul class="store-tasks"><li><span class="task-icon">→</span>埼玉研修のセミナー手法を導入</li><li><span class="task-icon">→</span>伊藤店長への依存から脱却</li><li><span class="task-icon">→</span>チーム雰囲気の改善</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">⛏️</div><div class="store-name">宇部店</div></div><div class="store-stats">📊 イベント営業4位｜17軒/95本</div><ul class="store-tasks"><li><span class="task-icon">→</span>毎日夕方ペアでロープレ実施中</li><li><span class="task-icon">→</span>1/7 西部3店舗勉強会を主催</li><li><span class="task-icon">→</span>オンライン面接テスト実施</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">🏯</div><div class="store-name">岩国店</div></div><div class="store-stats">📊 イベント営業5位｜14軒/79本</div><ul class="store-tasks"><li><span class="task-icon">→</span>梅本さんの進捗報告</li><li><span class="task-icon">→</span>週2回程度イベント参加</li><li><span class="task-icon">→</span>法人開拓の強化</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">✨</div><div class="store-name">光店</div></div><div class="store-stats">📊 イベント営業6位｜13軒/72本</div><ul class="store-tasks"><li><span class="task-icon">→</span>タイミーで社員1名・パート1名採用</li><li><span class="task-icon">→</span>アイパーク・光市役所イベント実施</li><li><span class="task-icon">→</span>獺祭イベントの状況確認</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">📍</div><div class="store-name">則貞店</div></div><div class="store-stats">📊 イベント営業7位｜5軒/28本</div><ul class="store-tasks"><li><span class="task-icon">→</span>12/21 日曜イベント予定</li><li><span class="task-icon">→</span>井田翔子さん12月末退職→台野氏応援</li><li><span class="task-icon">→</span>日曜ローラー営業の改善</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">🌉</div><div class="store-name">下関店</div></div><div class="store-stats">📊 イベント営業8位｜4軒/31本</div><ul class="store-tasks"><li><span class="task-icon">→</span>神戸製鋼所への交渉進展中</li><li><span class="task-icon">→</span>THK失敗の振り返りと対策</li><li><span class="task-icon">→</span>結婚式場・カーディーラー開拓</li></ul></div>
+        <div class="store-card"><div class="store-header"><div class="store-icon">🏘️</div><div class="store-name">尾尻店</div></div><div class="store-stats">📊 イベント営業9位｜1軒/5本</div><ul class="store-tasks"><li><span class="task-icon">→</span>イベント参加機会の増加</li><li><span class="task-icon">→</span>本店イベントへの参加検討</li><li><span class="task-icon">→</span>法人開拓の強化</li></ul></div>
+      </div>
+    </section>
+
+    <section class="training-section">
+      <h2 class="section-title"><div class="section-icon">📚</div>「未来塾」研修からの学び</h2>
+      <div class="training-grid">
+        <div class="training-card"><div class="training-icon">🔄</div><div class="training-title">ボトムアップ組織へ</div><div class="training-desc">リーダーは答えではなくヒントを与え、個人が自分で考えて行動する組織を目指す</div></div>
+        <div class="training-card"><div class="training-icon">🏃</div><div class="training-title">自走するチーム</div><div class="training-desc">「任せる」「認める」「巻き込む」を通じて価値ある職場づくり</div></div>
+        <div class="training-card"><div class="training-icon">🌈</div><div class="training-title">多様性の尊重</div><div class="training-desc">全員が同じ考えを持つ必要はなく、個性を尊重した取り組みが重要</div></div>
+        <div class="training-card"><div class="training-icon">🤝</div><div class="training-title">実践的スキル</div><div class="training-desc">他店舗との有意義な交流と情報交換で成長を加速</div></div>
+      </div>
+    </section>
+
+    <section class="hr-section">
+      <div class="hr-card">
+        <h2 class="section-title"><div class="section-icon">👋</div>退職予定者と対応</h2>
+        <div class="person-card"><div class="person-avatar">👨</div><div class="person-info"><div class="person-name">台野氏（宇部店）</div><div class="person-detail">2025年3〜4月目処で退職 → 代配・応援の中心として活動</div></div></div>
+        <div class="person-card"><div class="person-avatar">👩</div><div class="person-info"><div class="person-name">井田翔子さん（則貞店）</div><div class="person-detail">2025年12月末退職 → 台野氏が応援予定</div></div></div>
+      </div>
+      <div class="hr-card">
+        <h2 class="section-title"><div class="section-icon">⏰</div>タイミー活用術（ひかり店成功事例）</h2>
+        <div class="timee-flow">
+          <div class="flow-step"><div class="flow-icon">📱</div><div class="flow-title">タイミーで募集</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="flow-icon">📞</div><div class="flow-title">テレアポ業務</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="flow-icon">👀</div><div class="flow-title">働きぶり確認</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="flow-icon">🎉</div><div class="flow-title">正式採用打診</div></div>
+        </div>
+        <p style="margin-top: 15px; text-align: center; color: #666; font-size: 0.9rem;">✅ 成果：社員1名 + パート1名採用｜💡 ポイント：1分以内に説明できる簡単な仕事に限定</p>
+      </div>
+    </section>
+
+    <section class="strategy-section">
+      <h2 class="section-title"><div class="section-icon">🚀</div>全社で推進する戦略的取り組み</h2>
+      <div class="strategy-grid">
+        <div class="strategy-card"><div class="strategy-icon">📈</div><div class="strategy-title">詳しい数字分析</div><div class="strategy-desc">本店イベントの成果が支店にどれだけ貢献したかを見える化</div></div>
+        <div class="strategy-card"><div class="strategy-icon">🔍</div><div class="strategy-title">営業手法の分析</div><div class="strategy-desc">個人別の営業手法と成果を分析</div></div>
+        <div class="strategy-card"><div class="strategy-icon">🤖</div><div class="strategy-title">顧客名簿のAI活用</div><div class="strategy-desc">キャッシュレス種別・LINE登録有無を追加しAI自動集計</div></div>
+        <div class="strategy-card"><div class="strategy-icon">📚</div><div class="strategy-title">社内研修の復活</div><div class="strategy-desc">2〜3ヶ月に1回、オンラインを活用して実施</div></div>
+        <div class="strategy-card"><div class="strategy-icon">💻</div><div class="strategy-title">IT研修の実施</div><div class="strategy-desc">Googleマップ活用、スマホデータ入力など実践スキル向上</div></div>
+      </div>
+    </section>
+
+    <section class="next-section">
+      <h2 class="section-title"><div class="section-icon">✅</div>次回までの重点事項</h2>
+      <div class="next-grid">
+        <div class="next-card"><div class="next-title">🏢 法人イベント会場の新規開拓</div><div class="next-meta">👥 全店舗｜📅 各店舗1箇所以上</div></div>
+        <div class="next-card"><div class="next-title">📖 西部3店舗勉強会の開催</div><div class="next-meta">👥 則貞店主催｜📅 1月7日</div></div>
+        <div class="next-card"><div class="next-title">🤝 本店イベントへの他店舗参加調整</div><div class="next-meta">👥 村上MGR｜📅 1月中</div></div>
+        <div class="next-card"><div class="next-title">🚶 本店エリアペア開拓</div><div class="next-meta">👥 本店｜📅 1月21日（水）予定</div></div>
+        <div class="next-card"><div class="next-title">📝 未来塾研修レポートの提出</div><div class="next-meta">👥 参加者全員｜📅 早急に</div></div>
+        <div class="next-card"><div class="next-title">📋 年間大規模イベントのリストアップ</div><div class="next-meta">👥 各店舗ブロック長｜📅 次回会議まで</div></div>
+      </div>
+    </section>
+
+    <section class="message-section">
+      <div class="main-message">『結果を出すことが、仕事を楽しくする。』</div>
+      <div class="message-author">— 松代崇（社長）</div>
+      <div class="sub-messages">
+        <div class="sub-message">💭 本店に勉強しに来る、その考えで良いでしょうか？</div>
+        <div class="sub-message">🔥 絶対に自店で成功させてやる、という気持ちが必要ではないでしょうか？</div>
+        <div class="sub-message">😊 結果を出せば仕事は楽しくなるのではないでしょうか？</div>
+        <div class="sub-message">🏃 まず先頭を走って結果を出すことが大事ではないだろうか？</div>
+      </div>
+    </section>
+
+    <footer class="footer"><p>📄 松代商店 店長会議議事録 2025年12月10日｜以上</p></footer>
+  </div>
+</body>
+</html>
