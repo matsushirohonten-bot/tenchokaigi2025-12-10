@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>店長会議（2025-12-10）図解サマリー（Geminiメモ起点）</title>
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#111319;
+      --panel2:#151826;
+      --text:#e8eaf0;
+      --muted:#a8b0c2;
+      --line:#2a2f42;
+      --accent:#77bdfb;
+      --warn:#ffcc66;
+      --ok:#7ee787;
+      --bad:#ff7b72;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#0a0e18 70%);
+      color:var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.6;
+    }
+    a{color:var(--accent); text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px 16px 60px;}
+    header{
+      padding:18px 18px 10px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid var(--line);
+      border-radius:14px;
+      backdrop-filter: blur(6px);
+    }
+    h1{margin:0 0 6px; font-size:20px;}
+    .sub{color:var(--muted); font-size:13px; margin:0;}
+    nav{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin:14px 0 0;
+    }
+    nav a{
+      font-size:12px;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.02);
+      border-radius:999px;
+    }
+    section{
+      margin-top:16px;
+      padding:18px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid var(--line);
+      border-radius:14px;
+    }
+    h2{margin:0 0 10px; font-size:16px;}
+    h3{margin:14px 0 8px; font-size:14px; color:var(--text);}
+    .callout{
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+    }
+    .callout strong{color:#fff;}
+    .badge{
+      display:inline-block;
+      font-size:11px;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.02);
+      color:var(--muted);
+      vertical-align:middle;
+      margin-left:8px;
+      white-space:nowrap;
+    }
+    .badge.warn{color:var(--warn); border-color:rgba(255,204,102,0.35);}
+    .badge.ok{color:var(--ok); border-color:rgba(126,231,135,0.35);}
+    .badge.bad{color:var(--bad); border-color:rgba(255,123,114,0.35);}
+    ul{margin:8px 0 0 18px;}
+    li{margin:4px 0;}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media(min-width: 900px){
+      .grid.two{grid-template-columns: 1fr 1fr;}
+      .grid.three{grid-template-columns: 1fr 1fr 1fr;}
+    }
+    details{
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,0.02);
+      padding:10px 12px;
+    }
+    summary{cursor:pointer; color:#fff; font-weight:600;}
+    .muted{color:var(--muted);}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+      overflow:hidden;
+      border-radius:12px;
+    }
+    th,td{
+      border-bottom:1px solid var(--line);
+      padding:10px 10px;
+      font-size:12.5px;
+      vertical-align:top;
+    }
+    th{
+      text-align:left;
+      color:#fff;
+      background:rgba(255,255,255,0.03);
+      position:sticky;
+      top:0;
+    }
+    tr:hover td{background:rgba(255,255,255,0.02);}
+    .kpi td:nth-child(1){white-space:nowrap;}
+    .kpi .needcheck{color:var(--warn);}
+    .kpi .ok{color:var(--ok);}
+    .kpi .risk{color:var(--bad);}
+    .mini{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .qcard{
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(0,0,0,0.18);
+      padding:12px;
+    }
+    textarea{
+      width:100%;
+      min-height:90px;
+      resize:vertical;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.03);
+      color:var(--text);
+      padding:10px;
+      outline:none;
+      font-size:13px;
+      margin-top:8px;
+    }
+    .checks{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:8px;
+      margin-top:10px;
+    }
+    @media(min-width: 900px){
+      .checks{grid-template-columns: 1fr 1fr;}
+    }
+    label.ck{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 10px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,0.02);
+      cursor:pointer;
+    }
+    label.ck input{margin-top:3px;}
+    .footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    /* Mermaid container */
+    .mermaidBox{
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,0.02);
+      padding:10px;
+      overflow:auto;
+    }
+    .warnBox{
+      border-left:4px solid var(--warn);
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,204,102,0.08);
+      border:1px solid rgba(255,204,102,0.25);
+    }
+    .critBox{
+      border-left:4px solid var(--bad);
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,123,114,0.07);
+      border:1px solid rgba(255,123,114,0.22);
+    }
+    .okBox{
+      border-left:4px solid var(--ok);
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(126,231,135,0.08);
+      border:1px solid rgba(126,231,135,0.22);
+    }
+    code.inline{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:1px 6px;
+      border-radius:8px;
+      font-size:12px;
+    }
+  </style>
+
+  <!-- Mermaid (図解) : 社内PCでCDNがブロックされると図は表示されません -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.mermaid) {
+        mermaid.initialize({ startOnLoad: true, theme: "dark" });
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>店長会議（2025年12月10日）図解サマリー <span class="badge warn">Geminiメモ起点（要検証）</span></h1>
+      <p class="sub">目的：会議内容を「構造化」し、数字・意思決定・次アクションを見える化。あわせて、メモの弱点（曖昧さ/矛盾/欠落）を批判的に洗い出す。</p>
+      <nav>
+        <a href="#diagram">図解</a>
+        <a href="#facts">数字・事実（要検証）</a>
+        <a href="#insights">合意に近い示唆</a>
+        <a href="#critical">批判的チェック（矛盾・弱点）</a>
+        <a href="#actions">次アクション一覧</a>
+        <a href="#questions">3つの問い（あなたの入力欄）</a>
+        <a href="#verify">メモ精度の検証手順</a>
+      </nav>
+    </header>
+
+    <section class="callout">
+      <strong>前提（フラットに）：</strong>
+      このページは <em>あなたが貼ったGeminiメモ</em> を材料に再編集しています。録画・文字起こし・数値定義（件/本/契約/出荷）が混ざっている可能性があるため、<span class="badge warn">数字は「確定」ではなく「仮置き」</span> として扱います。
+    </section>
+
+    <!-- 図解 -->
+    <section id="diagram">
+      <h2>図解（全体像）</h2>
+      <div class="mermaidBox">
+<pre class="mermaid">
+mindmap
+  root((店長会議 2025-12-10))
+    目的
+      11月イベント実績の共有
+      法人イベント戦略の整理
+      未来塾の学び→組織改善
+      運用課題(採用/機材/運搬)
+    主要メッセージ
+      継続できる会場確保が最重要
+      短時間は即決より後追い設計
+      ボトムアップ(自発性)の文化
+    事実・数字(要検証)
+      11月: 9イベント / 平均72? / 実績8? (表記揺れ)
+      NTT: 9件(+当日1件)
+      本店スイミング: 7件(35本)
+      本店: 20回で88件
+      周南: 10回で24件(129本)
+      宇部: 10回で13件
+      平生: 6回で27件(125本) + 解約多
+    施策の方向性
+      場所
+        企業/サロン/商業施設/屋内
+        半年に1回など継続枠
+      人員
+        短時間は3人以上推奨の声
+        一方で参加は1人推奨(目的:本店流を体感)
+      営業設計
+        即決可能→即決優先
+        難しい→サンプル/モニター/予約→後追い
+      品質/継続率
+        平生: 解約率課題→抜本改革
+        個人課題と仕組み課題が混在
+      採用
+        タイミー活用(見極め)
+        リスク:選べない/当日運用負荷
+      機材
+        インボディ運搬の段取り
+    次のアクション(抜粋)
+      有給残日数→則貞へ連絡(当日)
+      大規模イベント1年分をリスト化(全店)
+      神戸製鋼アプローチ継続(下関)
+      台本作成と夕方ロープレ共有(宇部)
+      インボディ運搬調整(下関×宇部 ほか)
+    3つの問い
+      ①イベント増を契約数だけで評価して良い?
+      ②短時間イベントの成功定義は? (即決/後追い率)
+      ③解約が多い店舗は獲得より先に何を直すべき?
+</pre>
+      </div>
+      <p class="mini muted">※図が表示されない場合：社内環境で外部CDNがブロックされている可能性があります（本文はそのまま読めます）。</p>
+    </section>
+
+    <!-- 数字・事実 -->
+    <section id="facts">
+      <h2>数字・事実（メモ上の記載）<span class="badge warn">単位・定義が混ざっている可能性</span></h2>
+
+      <div class="warnBox">
+        <strong>要注意ポイント：</strong>
+        <ul>
+          <li>「件」「本」「契約」「出荷」「平均72」などが混在しています。<span class="muted">（例：平均72契約なのに実績8件、など矛盾して見える表現あり）</span></li>
+          <li>数字が「会議用の口頭共有」→「Gemini要約」で崩れている可能性があるため、<strong>KPI定義の確定が先</strong>です。</li>
+        </ul>
+      </div>
+
+      <table class="kpi">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>メモ上の記載</th>
+            <th>そのまま信じると起きる誤読</th>
+            <th>確認すべき点（録画/原文）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>11月イベント全体</td>
+            <td class="needcheck">「9つのイベントで平均72契約、8件の実績」</td>
+            <td>平均72が「本」なのか「件」なのか不明。8件との関係も不整合に見える。</td>
+            <td>72の単位、8件の意味（当日契約？新規？）をタイムスタンプ付きで確認。</td>
+          </tr>
+          <tr>
+            <td>法人イベント（NTT）</td>
+            <td class="ok">「9件、当日さらに1件」</td>
+            <td>成功事例として過大評価し、再現条件を見落とす。</td>
+            <td>実施時間、人数、後追い有無、持参物、導線を確認。</td>
+          </tr>
+          <tr>
+            <td>本店スイミング</td>
+            <td class="ok">「7件（35本）」</td>
+            <td>「件」と「本」の換算が暗黙のまま横比較しがち。</td>
+            <td>1契約あたり本数、継続率、解約率まで確認。</td>
+          </tr>
+          <tr>
+            <td>本店の11月</td>
+            <td class="ok">「約20回イベントで88件」</td>
+            <td>“イベント最強”で結論を急ぎ、運用コストを無視。</td>
+            <td>イベント種類別の件数、工数、参加人数、粗利を確認。</td>
+          </tr>
+          <tr>
+            <td>周南の11月</td>
+            <td class="ok">「10回で24件129本」</td>
+            <td>件数は多くなくても本数が多い等、比較軸がぶれる。</td>
+            <td>件数/本数/継続率/後追い率の4点セットで見直し。</td>
+          </tr>
+          <tr>
+            <td>宇部の11月</td>
+            <td class="ok">「10回で13件」</td>
+            <td>“低い”と断じる前に、イベント条件差を無視しがち。</td>
+            <td>短時間イベント比率、即決可能性、後追い設計の有無。</td>
+          </tr>
+          <tr>
+            <td>平生の11月</td>
+            <td class="risk">「6回で27件125本」＋「解約が多い」</td>
+            <td>獲得は見た目良いが、解約が高いと“燃費が悪い成長”になる。</td>
+            <td>解約理由の分類（短期/クレーム/中止客比率）、施策の因果を確認。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 合意に近い示唆 -->
+    <section id="insights">
+      <h2>合意に近い示唆（会議の「核」っぽい部分）</h2>
+
+      <div class="grid two">
+        <div class="okBox">
+          <strong>戦略面（イベント設計）</strong>
+          <ul>
+            <li><strong>会場の「継続枠」確保が最重要</strong>（半年に1回/3ヶ月に1回など、寒い時期は屋内を持つ）。</li>
+            <li>短時間イベントは、当日即決が物理的に難しい → <strong>サンプル/モニター/予約で後追い</strong>へ設計転換。</li>
+            <li>成功要因は「営業トーク」だけでなく、<strong>場所選定・時間帯・導線・人員体制</strong>の比重が大きい。</li>
+          </ul>
+        </div>
+
+        <div class="okBox">
+          <strong>組織面（未来塾の学びの翻訳）</strong>
+          <ul>
+            <li>答えを与えるより、ヒント/共感で <strong>自分で考えて動くチーム</strong>を作る。</li>
+            <li>「真面目な人が評価され、意見が吸い上がる」＝ボトムアップの改善が必要、という認識。</li>
+            <li>ただし、会議全体は<strong>トップダウンの指示も多い</strong>ため、両立設計が要る。</li>
+          </ul>
+        </div>
+      </div>
+
+      <details style="margin-top:12px;">
+        <summary>「イベントは宝の山」という主張を、フラットに解釈すると？</summary>
+        <div class="muted" style="margin-top:10px;">
+          <ul>
+            <li>既存のローラー/テレアポと違う顧客層を掘れる可能性はある。</li>
+            <li>一方で「宝の山」扱いすると、<strong>継続率・現場の運用負荷・人手不足</strong>が後回しになりやすい。</li>
+            <li>本当に強いのは「イベントそのもの」ではなく、<strong>イベント→後追い→継続</strong>の一連の仕組みかもしれない。</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- 批判的チェック -->
+    <section id="critical">
+      <h2>批判的チェック（矛盾・弱点・見落とし）<span class="badge bad">迎合せずに指摘</span></h2>
+
+      <div class="critBox">
+        <strong>このメモから見える “危うさ” を、そのまま挙げます：</strong>
+        <ul>
+          <li><strong>KPI定義が曖昧</strong>：件/本/契約/出荷が混在。比較が成立しないまま「どこが強い/弱い」を語る危険。</li>
+          <li><strong>人員の話がねじれている</strong>：短時間イベントは「3人以上が適切」提言がある一方、別箇所では「本店イベントには1人で来い（少人数が良い）」という運用方針。<br/>
+              → 目的が違うなら分けて設計すべき（成果重視の現場配置 vs 学習目的の参加）。</li>
+          <li><strong>“獲得”に議論が寄りやすく、継続（解約）に対する設計が弱い</strong>：平生店の解約課題は強く言及されるが、全店共通の「解約理由の型」「介入手順」「品質基準」が見えない。</li>
+          <li><strong>個人の問題と仕組みの問題が混線</strong>：梅本氏のスタイル課題など個別論があるが、再現可能な仕組み（チェック/育成/顧客保護）の議論に落ち切っていない可能性。</li>
+          <li><strong>採用（タイミー）も、運用コストが過小評価されがち</strong>：「選べない」「時間厳守」「1分で説明できる仕事に限る」など制約があるのに、誰が教育/受け入れ/品質担保するかが未整理に見える。</li>
+          <li><strong>文字起こし由来の崩れが混入</strong>：例）「コ密所測」など意味不明な語、末尾の「クレートを投げといてください」等の口語がそのまま残り、文脈が切れている箇所あり。</li>
+        </ul>
+      </div>
+
+      <details style="margin-top:12px;">
+        <summary>ここから“次にやるべき整理”を、あえて提案するなら</summary>
+        <div class="muted" style="margin-top:10px;">
+          <ol>
+            <li><strong>共通KPIを確定</strong>：①測定数 ②当日即決数 ③後追いアポ数 ④後追い成約数 ⑤継続率/解約率（90日/180日）</li>
+            <li><strong>イベントを型で分ける</strong>：短時間（食堂休憩）／長時間（9-17）／サロン（セミナー型）／商業施設など。型ごとに人員・台本・持ち物・導線を固定化。</li>
+            <li><strong>後追いの「手順」を標準化</strong>：サンプル配布→モニター登録→予約→訪問→継続確認までのテンプレ、責任者、期限。</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <!-- 次アクション -->
+    <section id="actions">
+      <h2>次アクション一覧（メモから抽出）<span class="badge warn">期限・定義が未設定のもの多め</span></h2>
+      <p class="mini muted">「誰が」「いつまでに」「何をもって完了か」が曖昧なものは、ここでは <span class="badge warn">要決定</span> にしています。</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:18%;">担当</th>
+            <th>アクション</th>
+            <th style="width:16%;">期限（メモ）</th>
+            <th style="width:18%;">完了条件（提案）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>松代崇</td>
+            <td>有給休暇の残日数を計算し、則貞店へ送付</td>
+            <td>当日</td>
+            <td>残日数・基準日・計算根拠を明記して送信</td>
+          </tr>
+          <tr>
+            <td>下関支店</td>
+            <td>翌日の訪問に向け、持ち帰り用箱準備／鍵の保管（自販機内）／必要物のFAX連絡</td>
+            <td>「明日訪問」前</td>
+            <td>物品と手順が現場で迷わず実行できる状態</td>
+          </tr>
+          <tr>
+            <td>全参加者</td>
+            <td>未来塾研修内容についてレポート提出</td>
+            <td class="needcheck">要決定</td>
+            <td>1)学び 2)現場で試すこと 3)測定指標 を1枚で提出</td>
+          </tr>
+          <tr>
+            <td>尾尻（下松店）</td>
+            <td>法人営業でアポ取得→松代崇に連絡→同行訪問</td>
+            <td class="needcheck">要決定</td>
+            <td>アポ日時/目的/想定参加者/必要物が揃う</td>
+          </tr>
+          <tr>
+            <td>ひかり店</td>
+            <td>市役所/Iパークの状況確認、長時間帯イベントの交渉</td>
+            <td>今月中</td>
+            <td>実施候補日程（複数）＋継続枠の可否が確定</td>
+          </tr>
+          <tr>
+            <td>周南店</td>
+            <td>企業イベントの場所取りを優先して進める</td>
+            <td class="needcheck">要決定</td>
+            <td>候補リスト（10社/施設など）＋交渉ステータス</td>
+          </tr>
+          <tr>
+            <td>坂野（明治）</td>
+            <td>老健施設/薬局系の話を進める（候補情報募集含む）</td>
+            <td class="needcheck">要決定</td>
+            <td>候補先・窓口・提案資料・次回アクションが明確</td>
+          </tr>
+          <tr>
+            <td>宇部店</td>
+            <td>小規模企業/配達先への訪問を進める、来年は人数を揃えてふれあいセンターへ</td>
+            <td>来年（広い）</td>
+            <td>来月までに候補5件＋訪問計画＋必要人員見積り</td>
+          </tr>
+          <tr>
+            <td>宇部店</td>
+            <td>イベント台本を使い、毎日ペアで夕方ロープレ→形になったら共有</td>
+            <td class="needcheck">要決定</td>
+            <td>台本v1共有＋ロープレ記録（週次）</td>
+          </tr>
+          <tr>
+            <td>下関支店</td>
+            <td>神戸製鋼（総務まで進行）を継続し、可能なら事前予約も検討</td>
+            <td class="needcheck">要決定</td>
+            <td>実施可否・実施形式（安全大会/食堂/予約）を確定</td>
+          </tr>
+          <tr>
+            <td>全店舗（ブロック長）</td>
+            <td>今後1年分の大規模イベントをスプレッドシートにリスト化し、参加準備</td>
+            <td>「今後1年」(開始は即)</td>
+            <td>市町村別リスト＋申込期限＋担当＋必要物が揃う</td>
+          </tr>
+          <tr>
+            <td>松代崇</td>
+            <td>失効したハローワーク求人情報を更新</td>
+            <td class="needcheck">要決定</td>
+            <td>掲載再開＋応募導線（連絡先/勤務条件）が最新</td>
+          </tr>
+          <tr>
+            <td>下関支店 × 宇部店</td>
+            <td>温泉イベント→翌朝市役所イベントに向けたインボディ運搬を個別調整</td>
+            <td>直近日程</td>
+            <td>誰が/何時に/どこへ/どう運ぶ が確定</td>
+          </tr>
+          <tr>
+            <td>坂野（明治）</td>
+            <td>12/14「レジのインボディ」について確認</td>
+            <td>12/14</td>
+            <td>設置場所・台数・搬入経路・責任者が確定</td>
+          </tr>
+          <tr>
+            <td>則貞店（参考）</td>
+            <td>12/21 日曜イベント実施（中尾氏と）</td>
+            <td>12/21</td>
+            <td>目標（測定/件数）と配置/役割が事前に確定</td>
+          </tr>
+          <tr>
+            <td>西武3店舗（参考）</td>
+            <td>則貞店主催で1/7勉強会、1月に合同開拓（アジス/シーモール）</td>
+            <td>2026/1/7・1月</td>
+            <td>議題・持ち帰り施策・現場同行の割当が明確</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3つの問い -->
+    <section id="questions">
+      <h2>3つの問い（あなたと一緒に考える）<span class="badge ok">入力はこのPC内に保存</span></h2>
+      <p class="mini muted">下の入力欄はブラウザのローカル保存（localStorage）を使います。社内規程がある場合は注意してください。</p>
+
+      <div class="grid three">
+        <div class="qcard">
+          <strong>問い①：イベント増を「契約数」だけで評価して良い？</strong>
+          <p class="mini muted">
+            もし「短期の獲得」が増えても、解約が増えたら実質の成長は鈍ります。
+            <br/>あなたが “成果” と呼びたいのは、<span class="muted">件数</span> / <span class="muted">本数</span> / <span class="muted">継続率</span> / <span class="muted">粗利</span> のどれ？
+          </p>
+          <textarea data-key="q1" placeholder="あなたの考え：評価指標をどう置く？"></textarea>
+        </div>
+
+        <div class="qcard">
+          <strong>問い②：短時間イベントの「成功定義」は何？</strong>
+          <p class="mini muted">
+            当日即決が難しいなら、成功は「後追いに乗せる率」かもしれません。
+            <br/>例：測定→モニター登録→予約→訪問→成約 までの <span class="muted">転換率</span> をどう設計しますか？
+          </p>
+          <textarea data-key="q2" placeholder="あなたの考え：短時間イベントの設計（型）をどうする？"></textarea>
+        </div>
+
+        <div class="qcard">
+          <strong>問い③：解約が多い店舗は「獲得より先に」何を直すべき？</strong>
+          <p class="mini muted">
+            “中止客ばかり狙う” など原因仮説はあるが、介入設計が見えにくい。
+            <br/>あなたなら、<span class="muted">解約理由の分類</span> と <span class="muted">介入手順</span> をどう作りますか？
+          </p>
+          <textarea data-key="q3" placeholder="あなたの考え：解約の構造と、先に直すべきボトルネックは？"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- メモ精度の検証手順 -->
+    <section id="verify">
+      <h2>Geminiメモの精度を上げる検証手順（チェックリスト）</h2>
+
+      <div class="warnBox">
+        <strong>ここが肝：</strong>「要約の“読みやすさ”」と「業務判断に耐える“正確さ”」は別物です。
+        <br/>判断に使うなら、最低限 <code class="inline">数字</code> / <code class="inline">意思決定</code> / <code class="inline">担当と期限</code> を録画で裏取りした方が安全です。
+      </div>
+
+      <div class="checks">
+        <label class="ck"><input type="checkbox" data-key="ck1"/>
+          <div>
+            <strong>数値の定義を確定</strong>
+            <div class="mini muted">「件＝新規契約？」「本＝出荷本数？」「平均72の単位」などを録画で確認。</div>
+          </div>
+        </label>
+
+        <label class="ck"><input type="checkbox" data-key="ck2"/>
+          <div>
+            <strong>意思決定（指示）と雑談を分離</strong>
+            <div class="mini muted">アイスブレイクや口語表現が混じると、重要事項が埋もれる。</div>
+          </div>
+        </label>
+
+        <label class="ck"><input type="checkbox" data-key="ck3"/>
+          <div>
+            <strong>「誰がやるか」を全件に付与</strong>
+            <div class="mini muted">推奨ステップの多くが “担当不明” になりやすい。</div>
+          </div>
+        </label>
+
+        <label class="ck"><input type="checkbox" data-key="ck4"/>
+          <div>
+            <strong>期限（いつまで）を全件に付与</strong>
+            <div class="mini muted">曖昧だと実行されず、「言っただけ」になりがち。</div>
+          </div>
+        </label>
+
+        <label class="ck"><input type="checkbox" data-key="ck5"/>
+          <div>
+            <strong>“完了条件” を1行で書く</strong>
+            <div class="mini muted">例：イベント会場確保＝「次回日程まで押さえた」など。</div>
+          </div>
+        </label>
+
+        <label class="ck"><input type="checkbox" data-key="ck6"/>
+          <div>
+            <strong>音声が崩れている箇所を明示</strong>
+            <div class="mini muted">例：「コ密所測」「レジのインボディ」など、誤認しそうな語を “要聞き直し” で隔離。</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="footer">
+        <p>※このHTMLは“会議の内容を決めつける”ためではなく、<strong>曖昧さを可視化して、次に何を確かめるべきか</strong>を整理するためのものです。</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // 入力内容をlocalStorageに保存（ブラウザ内のみ）
+    (function(){
+      // textareas
+      document.querySelectorAll("textarea[data-key]").forEach(el => {
+        const key = el.dataset.key;
+        const saved = localStorage.getItem(key);
+        if (saved !== null) el.value = saved;
+        el.addEventListener("input", () => localStorage.setItem(key, el.value));
+      });
+
+      // checkboxes
+      document.querySelectorAll("input[type='checkbox'][data-key]").forEach(cb => {
+        const key = cb.dataset.key;
+        const saved = localStorage.getItem(key);
+        if (saved !== null) cb.checked = (saved === "1");
+        cb.addEventListener("change", () => localStorage.setItem(key, cb.checked ? "1" : "0"));
+      });
+    })();
+  </script>
+</body>
+</html>
